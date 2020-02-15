@@ -10,4 +10,9 @@ public class FibonacciTest {
   void should_return_1_when_calculate_given_1() {
     assertEquals(Fibonacci.getFibonacciByDigits(1), 1);
   }
+
+  @Test
+  void should_return_1_when_calculate_given_2() {
+    assertEquals(Fibonacci.getFibonacciByDigits(2), 1);
+  }
 }
