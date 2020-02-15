@@ -6,6 +6,8 @@ package cc.xpbootcamp.warmup.cashier;
  * the total order amount (amount of individual lineItems + total sales tax) and prints it.
  */
 public class OrderReceipt {
+  public static double SALE_ROTE = .10;
+
   private Order order;
 
   public OrderReceipt(Order order) {
@@ -14,7 +16,6 @@ public class OrderReceipt {
 
   public String printReceipt() {
     StringBuilder output = new StringBuilder();
-
     output.append("======Printing Orders======\n");
 
     output.append(order.getCustomerName());
@@ -32,7 +33,7 @@ public class OrderReceipt {
       output.append(lineItem.totalAmount());
       output.append('\n');
 
-      double salesTax = lineItem.totalAmount() * .10;
+      double salesTax = lineItem.totalAmount() * SALE_ROTE;
       totSalesTx += salesTax;
 
       tot += lineItem.totalAmount() + salesTax;
