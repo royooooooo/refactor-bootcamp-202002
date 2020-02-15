@@ -21,15 +21,22 @@ public class OrderReceipt {
     output.append(order.getCustomerName());
     output.append(order.getCustomerAddress());
 
-    double totalSalesTax = 0d;
+    double totalSalesTax = getTotalSalesTax();
     double totalAmountWithoutTax = 0d;
     for (LineItem lineItem : order.getLineItems()) {
       output.append(lineItem.getLineItemTypeInformation());
-      totalSalesTax += lineItem.totalAmount() * SALE_ROTE;
       totalAmountWithoutTax += lineItem.totalAmount();
     }
     output.append("Sales Tax").append('\t').append(totalSalesTax);
     output.append("Total Amount").append('\t').append(totalAmountWithoutTax + totalSalesTax);
     return output.toString();
+  }
+
+  public double getTotalSalesTax() {
+    return order.getLineItems().stream()
+        .reduce(
+            0d,
+            (totalSaleTax, lineItem) -> totalSaleTax + (lineItem.totalAmount() * SALE_ROTE),
+            Double::sum);
   }
 }
