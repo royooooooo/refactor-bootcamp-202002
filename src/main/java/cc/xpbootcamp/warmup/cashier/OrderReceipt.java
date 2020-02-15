@@ -17,16 +17,11 @@ public class OrderReceipt {
   public String printReceipt() {
     StringBuilder output = new StringBuilder();
     output.append("======Printing Orders======\n");
-
     output.append(order.getCustomerName());
     output.append(order.getCustomerAddress());
-
-    double totalSalesTax = getTotalSalesTax();
-    for (LineItem lineItem : order.getLineItems()) {
-      output.append(lineItem.getLineItemTypeInformation());
-    }
-    output.append("Sales Tax").append('\t').append(totalSalesTax);
-    output.append("Total Amount").append('\t').append(getTotalAmountWithoutTax() + totalSalesTax);
+    output.append(getOrderLineItemsTypeInformation());
+    output.append("Sales Tax\t").append(getTotalSalesTax());
+    output.append("Total Amount\t").append(getTotalAmountWithoutTax() + getTotalSalesTax());
     return output.toString();
   }
 
@@ -44,5 +39,13 @@ public class OrderReceipt {
             0d,
             (totalAmountWithoutTax, lineItem) -> totalAmountWithoutTax + lineItem.totalAmount(),
             Double::sum);
+  }
+
+  public String getOrderLineItemsTypeInformation() {
+    return order.getLineItems().stream()
+        .reduce(
+            "",
+            (typeInformation, lineItem) -> typeInformation + lineItem.getLineItemTypeInformation(),
+            String::concat);
   }
 }
