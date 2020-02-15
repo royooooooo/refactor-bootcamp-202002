@@ -15,4 +15,9 @@ public class FibonacciTest {
   void should_return_1_when_calculate_given_2() {
     assertEquals(Fibonacci.getFibonacciByDigits(2), 1);
   }
+
+  @Test
+  void should_return_2_when_calculate_given_3() {
+    assertEquals(Fibonacci.getFibonacciByDigits(3), 2);
+  }
 }
