@@ -15,14 +15,14 @@ public class OrderReceipt {
   }
 
   public String printReceipt() {
-    StringBuilder output = new StringBuilder();
-    output.append("======Printing Orders======\n");
-    output.append(order.getCustomerName());
-    output.append(order.getCustomerAddress());
-    output.append(getOrderLineItemsTypeInformation());
-    output.append("Sales Tax\t").append(getTotalSalesTax());
-    output.append("Total Amount\t").append(getTotalAmountWithoutTax() + getTotalSalesTax());
-    return output.toString();
+    return "======Printing Orders======\n"
+        + order.getCustomerName()
+        + order.getCustomerAddress()
+        + getOrderLineItemsTypeInformation()
+        + "Sales Tax\t"
+        + getTotalSalesTax()
+        + "Total Amount\t"
+        + (getTotalAmountWithoutTax() + getTotalSalesTax());
   }
 
   public double getTotalSalesTax() {
