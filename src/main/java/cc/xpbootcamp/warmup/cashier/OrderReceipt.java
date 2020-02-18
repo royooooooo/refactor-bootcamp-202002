@@ -17,44 +17,52 @@ public class OrderReceipt {
   }
 
   public String printReceipt() {
-    return generateReceiptHeader()
-        + generateReceiptDateInformation()
-        + generateReceiptBody()
-        + generateReceiptFooter();
+    return getReceiptHeader()
+        + getReceiptDateInformation()
+        + getReceiptBodyInformation()
+        + getReceiptFooterInformation();
   }
 
-  private String generateReceiptDateInformation() {
+  private String getReceiptHeader() {
+    return "===== 老王超市，值得信赖 ======\n";
+  }
+
+  private String getReceiptDateInformation() {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy年M月dd日，EE", Locale.CHINA);
     return "\n" + dateProvider.getCurrentDate().format(formatter) + "\n";
   }
 
-  private String generateReceiptHeader() {
-    return "===== 老王超市，值得信赖 ======\n";
-  }
-
-  private String generateReceiptBody() {
+  private String getReceiptBodyInformation() {
     return order.getOrderLineItemsTypeInformation();
   }
 
-  private String generateReceiptFooter() {
+  private String getReceiptFooterInformation() {
     return "-----------------------------------\n"
-        + String.format("税额：%.2f\n", order.getTotalSalesTax())
-        + generateDiscountInformation()
-        + String.format(
-            "总价：%.2f", order.getTotalAmountWithoutTax() + order.getTotalSalesTax() - getDiscount());
+        + getTotalSalesTaxInformation()
+        + getDiscountInformation()
+        + getTotalAmountInformation();
   }
 
-  private String generateDiscountInformation() {
+  private String getTotalSalesTaxInformation() {
+    return String.format("税额：%.2f\n", order.getTotalSalesTax());
+  }
+
+  private String getDiscountInformation() {
     return todayIsDiscountDay() ? String.format("折扣：%.2f\n", getDiscount()) : "";
+  }
+
+  private String getTotalAmountInformation() {
+    return String.format(
+        "总价：%.2f", order.getTotalAmountWithoutTax() + order.getTotalSalesTax() - getDiscount());
+  }
+
+  private boolean todayIsDiscountDay() {
+    return getReceiptDateInformation().contains(DISCOUNT_DAY);
   }
 
   private double getDiscount() {
     return todayIsDiscountDay()
         ? (order.getTotalAmountWithoutTax() + order.getTotalSalesTax()) * DISCOUNT_RATE
         : 0;
-  }
-
-  private boolean todayIsDiscountDay() {
-    return generateReceiptDateInformation().contains(DISCOUNT_DAY);
   }
 }
