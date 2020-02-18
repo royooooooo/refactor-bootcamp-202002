@@ -15,7 +15,11 @@ public class OrderReceipt {
   }
 
   public String printReceipt() {
-    return generateReceiptHeader() + generateReceiptBody() + generateReceiptFooter();
+    return generateReceiptHeader()
+        + generateReceiptDateInformation()
+        + generateCustomerInformation()
+        + generateReceiptBody()
+        + generateReceiptFooter();
   }
 
   private String generateReceiptDateInformation() {
@@ -24,10 +28,11 @@ public class OrderReceipt {
   }
 
   private String generateReceiptHeader() {
-    return "===== 老王超市，值得信赖 ======\n"
-        + generateReceiptDateInformation()
-        + order.getCustomerName()
-        + order.getCustomerAddress();
+    return "===== 老王超市，值得信赖 ======\n";
+  }
+
+  private String generateCustomerInformation() {
+    return order.getCustomerName() + order.getCustomerAddress();
   }
 
   private String generateReceiptBody() {
