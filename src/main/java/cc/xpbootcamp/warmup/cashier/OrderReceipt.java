@@ -35,7 +35,8 @@ public class OrderReceipt {
   }
 
   private String generateReceiptFooter() {
-    return "Sales Tax\t"
+    return "-----------------------------------"
+        + "Sales Tax\t"
         + order.getTotalSalesTax()
         + "Total Amount\t"
         + (order.getTotalAmountWithoutTax() + order.getTotalSalesTax());
