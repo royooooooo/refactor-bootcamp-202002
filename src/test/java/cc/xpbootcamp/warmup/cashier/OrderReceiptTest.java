@@ -22,15 +22,13 @@ class OrderReceiptTest {
   @Test
   void shouldPrintCustomerInformationOnOrder() {
     mockDate(2020, 2, 17, 12, 12);
-    Order order = new Order("Mr X", "Chicago, 60601", new ArrayList<>());
+    Order order = new Order(new ArrayList<>());
     OrderReceipt receipt = new OrderReceipt(order, dateProvider);
 
     String output = receipt.printReceipt();
 
     assertThat(output, containsString("===== 老王超市，值得信赖 ======"));
     assertThat(output, containsString("2020年2月17日，星期一"));
-    assertThat(output, containsString("Mr X"));
-    assertThat(output, containsString("Chicago, 60601"));
   }
 
   @Test
@@ -44,7 +42,7 @@ class OrderReceiptTest {
             add(new LineItem("chocolate", 20.0, 1));
           }
         };
-    OrderReceipt receipt = new OrderReceipt(new Order(null, null, lineItems), dateProvider);
+    OrderReceipt receipt = new OrderReceipt(new Order(lineItems), dateProvider);
 
     String output = receipt.printReceipt();
 
@@ -60,8 +58,7 @@ class OrderReceiptTest {
   @Test
   public void shouldPrintCorrectDateInformationInDifferentDays() {
     mockDate(2020, 2, 19, 12, 12);
-
-    Order order = new Order("Mr X", "Chicago, 60601", new ArrayList<>());
+    Order order = new Order(new ArrayList<>());
     OrderReceipt receipt = new OrderReceipt(order, dateProvider);
 
     String output = receipt.printReceipt();

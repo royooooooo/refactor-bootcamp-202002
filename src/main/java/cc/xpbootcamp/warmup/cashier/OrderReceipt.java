@@ -17,7 +17,6 @@ public class OrderReceipt {
   public String printReceipt() {
     return generateReceiptHeader()
         + generateReceiptDateInformation()
-        + generateCustomerInformation()
         + generateReceiptBody()
         + generateReceiptFooter();
   }
@@ -29,10 +28,6 @@ public class OrderReceipt {
 
   private String generateReceiptHeader() {
     return "===== 老王超市，值得信赖 ======\n";
-  }
-
-  private String generateCustomerInformation() {
-    return order.getCustomerName() + order.getCustomerAddress();
   }
 
   private String generateReceiptBody() {
