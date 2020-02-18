@@ -47,7 +47,7 @@ class OrderReceiptTest {
     String output = receipt.printReceipt();
 
     assertThat(output, containsString("===== 老王超市，值得信赖 ======"));
-    assertThat(output, containsString("2020年2月17日，星期一"));
+    assertThat(output, containsString("2020年2月17日，星期一\n"));
     assertThat(output, containsString("milk\t10.0\t2\t20.0\n"));
     assertThat(output, containsString("biscuits\t5.0\t5\t25.0\n"));
     assertThat(output, containsString("chocolate\t20.0\t1\t20.0\n"));
@@ -63,6 +63,6 @@ class OrderReceiptTest {
 
     String output = receipt.printReceipt();
 
-    assertThat(output, containsString("2020年2月19日，星期三"));
+    assertThat(output, containsString("2020年2月19日，星期三\n"));
   }
 }

@@ -30,7 +30,7 @@ public class Order {
   public String getOrderLineItemsTypeInformation() {
     return lineItems.stream()
         .reduce(
-            "",
+            "\n",
             (typeInformation, lineItem) -> typeInformation + lineItem.getLineItemTypeInformation(),
             String::concat);
   }
