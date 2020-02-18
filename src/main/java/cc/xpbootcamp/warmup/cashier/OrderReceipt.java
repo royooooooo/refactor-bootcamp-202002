@@ -37,8 +37,8 @@ public class OrderReceipt {
   private String generateReceiptFooter() {
     return "-----------------------------------"
         + "税额："
-        + order.getTotalSalesTax()
+        + String.format("%.2f", order.getTotalSalesTax())
         + "总价："
-        + (order.getTotalAmountWithoutTax() + order.getTotalSalesTax());
+        + String.format("%.2f", order.getTotalAmountWithoutTax() + order.getTotalSalesTax());
   }
 }

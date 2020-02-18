@@ -49,12 +49,12 @@ class OrderReceiptTest {
 
     assertThat(output, containsString("===== 老王超市，值得信赖 ======"));
     assertThat(output, containsString("2020年2月17日，星期一\n"));
-    assertThat(output, containsString("milk，10.0 ✖ 2，20.0\n"));
-    assertThat(output, containsString("biscuits，5.0 ✖ 5，25.0\n"));
-    assertThat(output, containsString("chocolate，20.0 ✖ 1，20.0\n"));
+    assertThat(output, containsString("milk，10.00 ✖ 2，20.00\n"));
+    assertThat(output, containsString("biscuits，5.00 ✖ 5，25.00\n"));
+    assertThat(output, containsString("chocolate，20.00 ✖ 1，20.00\n"));
     assertThat(output, containsString("-----------------------------------"));
-    assertThat(output, containsString("税额：6.5"));
-    assertThat(output, containsString("总价：71.5"));
+    assertThat(output, containsString("税额：6.50"));
+    assertThat(output, containsString("总价：71.50"));
   }
 
   @Test

@@ -30,7 +30,7 @@ public class LineItem {
 
   public String getLineItemTypeInformation() {
     return String.format(
-        "%s，%s ✖ %d，%s\n",
+        "%s，%.2f ✖ %d，%.2f\n",
         this.getDescription(), this.getPrice(), this.getQuantity(), this.totalAmount());
   }
 }
