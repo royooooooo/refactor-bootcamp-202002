@@ -10,14 +10,21 @@ public class OrderReceipt {
   }
 
   public String printReceipt() {
-    return "======Printing Orders======\n"
-        + order.getCustomerName()
-        + order.getCustomerAddress()
-        + order.getOrderLineItemsTypeInformation()
-        + "Sales Tax\t"
+    return generateReceiptHeader() + generateReceiptBody() + generateReceiptFooter();
+  }
+
+  private String generateReceiptHeader() {
+    return "======Printing Orders======\n" + order.getCustomerName() + order.getCustomerAddress();
+  }
+
+  private String generateReceiptBody() {
+    return order.getOrderLineItemsTypeInformation();
+  }
+
+  private String generateReceiptFooter() {
+    return "Sales Tax\t"
         + order.getTotalSalesTax()
         + "Total Amount\t"
         + (order.getTotalAmountWithoutTax() + order.getTotalSalesTax());
   }
-
 }
