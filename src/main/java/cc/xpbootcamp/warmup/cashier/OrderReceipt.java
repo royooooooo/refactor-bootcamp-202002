@@ -15,17 +15,9 @@ public class OrderReceipt {
         + order.getCustomerAddress()
         + getOrderLineItemsTypeInformation()
         + "Sales Tax\t"
-        + getTotalSalesTax()
+        + order.getTotalSalesTax()
         + "Total Amount\t"
-        + (getTotalAmountWithoutTax() + getTotalSalesTax());
-  }
-
-  public double getTotalSalesTax() {
-    return order.getLineItems().stream()
-        .reduce(
-            0d,
-            (totalSaleTax, lineItem) -> totalSaleTax + (lineItem.totalAmount() * SALE_ROTE),
-            Double::sum);
+        + (getTotalAmountWithoutTax() + order.getTotalSalesTax());
   }
 
   public double getTotalAmountWithoutTax() {
