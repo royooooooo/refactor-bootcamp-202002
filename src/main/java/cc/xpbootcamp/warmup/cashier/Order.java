@@ -21,10 +21,6 @@ public class Order {
     return address;
   }
 
-  public List<LineItem> getLineItems() {
-    return lineItems;
-  }
-
   public double getTotalSalesTax() {
     return lineItems.stream()
         .reduce(
@@ -40,5 +36,13 @@ public class Order {
             0d,
             (totalAmountWithoutTax, lineItem) -> totalAmountWithoutTax + lineItem.totalAmount(),
             Double::sum);
+  }
+
+  public String getOrderLineItemsTypeInformation() {
+    return lineItems.stream()
+        .reduce(
+            "",
+            (typeInformation, lineItem) -> typeInformation + lineItem.getLineItemTypeInformation(),
+            String::concat);
   }
 }

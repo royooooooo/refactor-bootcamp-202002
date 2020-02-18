@@ -13,18 +13,11 @@ public class OrderReceipt {
     return "======Printing Orders======\n"
         + order.getCustomerName()
         + order.getCustomerAddress()
-        + getOrderLineItemsTypeInformation()
+        + order.getOrderLineItemsTypeInformation()
         + "Sales Tax\t"
         + order.getTotalSalesTax()
         + "Total Amount\t"
         + (order.getTotalAmountWithoutTax() + order.getTotalSalesTax());
   }
 
-  public String getOrderLineItemsTypeInformation() {
-    return order.getLineItems().stream()
-        .reduce(
-            "",
-            (typeInformation, lineItem) -> typeInformation + lineItem.getLineItemTypeInformation(),
-            String::concat);
-  }
 }
