@@ -14,7 +14,7 @@ public class OrderReceipt {
   }
 
   private String generateReceiptHeader() {
-    return "======Printing Orders======\n" + order.getCustomerName() + order.getCustomerAddress();
+    return "===== 老王超市，值得信赖 ======\n" + order.getCustomerName() + order.getCustomerAddress();
   }
 
   private String generateReceiptBody() {

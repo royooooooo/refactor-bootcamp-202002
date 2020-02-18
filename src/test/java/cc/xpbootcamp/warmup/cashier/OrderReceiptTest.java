@@ -16,7 +16,7 @@ class OrderReceiptTest {
 
         String output = receipt.printReceipt();
 
-
+        assertThat(output, containsString("===== 老王超市，值得信赖 ======"));
         assertThat(output, containsString("Mr X"));
         assertThat(output, containsString("Chicago, 60601"));
     }
@@ -32,6 +32,7 @@ class OrderReceiptTest {
 
         String output = receipt.printReceipt();
 
+        assertThat(output, containsString("===== 老王超市，值得信赖 ======"));
         assertThat(output, containsString("milk\t10.0\t2\t20.0\n"));
         assertThat(output, containsString("biscuits\t5.0\t5\t25.0\n"));
         assertThat(output, containsString("chocolate\t20.0\t1\t20.0\n"));
