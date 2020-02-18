@@ -5,6 +5,8 @@ import java.util.Locale;
 
 public class OrderReceipt {
   public static double SALE_ROTE = .10;
+  public static double DISCOUNT_RATE = 0.02;
+  public static String DISCOUNT_DAY = "星期三";
 
   private Order order;
   private DateProvider dateProvider;
@@ -35,10 +37,24 @@ public class OrderReceipt {
   }
 
   private String generateReceiptFooter() {
-    return "-----------------------------------"
-        + "税额："
-        + String.format("%.2f", order.getTotalSalesTax())
-        + "总价："
-        + String.format("%.2f", order.getTotalAmountWithoutTax() + order.getTotalSalesTax());
+    return "-----------------------------------\n"
+        + String.format("税额：%.2f\n", order.getTotalSalesTax())
+        + generateDiscountInformation()
+        + String.format(
+            "总价：%.2f", order.getTotalAmountWithoutTax() + order.getTotalSalesTax() - getDiscount());
+  }
+
+  private String generateDiscountInformation() {
+    return todayIsDiscountDay() ? String.format("折扣：%.2f\n", getDiscount()) : "";
+  }
+
+  private double getDiscount() {
+    return todayIsDiscountDay()
+        ? (order.getTotalAmountWithoutTax() + order.getTotalSalesTax()) * DISCOUNT_RATE
+        : 0;
+  }
+
+  private boolean todayIsDiscountDay() {
+    return generateReceiptDateInformation().contains(DISCOUNT_DAY);
   }
 }

@@ -2,6 +2,7 @@ package cc.xpbootcamp.warmup.cashier;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.not;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -54,6 +55,7 @@ class OrderReceiptTest {
     assertThat(output, containsString("chocolate，20.00 ✖ 1，20.00\n"));
     assertThat(output, containsString("-----------------------------------"));
     assertThat(output, containsString("税额：6.50"));
+    assertThat(output, not(containsString("折扣：")));
     assertThat(output, containsString("总价：71.50"));
   }
 
@@ -66,5 +68,29 @@ class OrderReceiptTest {
     String output = receipt.printReceipt();
 
     assertThat(output, containsString("2020年2月19日，星期三\n"));
+  }
+
+  @Test
+  public void shouldPrintLineItemAndSalesTaxInformationWhenWednesday() {
+    mockDate(2020, 2, 19, 12, 12);
+    List<LineItem> lineItems =
+        new ArrayList<LineItem>() {
+          {
+            add(new LineItem("巧克力", 21.5, 2));
+            add(new LineItem("小白菜", 10, 1));
+          }
+        };
+    OrderReceipt receipt = new OrderReceipt(new Order(lineItems), dateProvider);
+
+    String output = receipt.printReceipt();
+
+    assertThat(output, containsString("===== 老王超市，值得信赖 ======"));
+    assertThat(output, containsString("2020年2月19日，星期三\n"));
+    assertThat(output, containsString("巧克力，21.50 ✖ 2，43.00\n"));
+    assertThat(output, containsString("小白菜，10.00 ✖ 1，10.00\n"));
+    assertThat(output, containsString("-----------------------------------"));
+    assertThat(output, containsString("税额：5.30"));
+    assertThat(output, containsString("折扣：1.17"));
+    assertThat(output, containsString("总价：57.13"));
   }
 }
