@@ -53,8 +53,8 @@ class OrderReceiptTest {
     assertThat(output, containsString("biscuits，5.0 ✖ 5，25.0\n"));
     assertThat(output, containsString("chocolate，20.0 ✖ 1，20.0\n"));
     assertThat(output, containsString("-----------------------------------"));
-    assertThat(output, containsString("Sales Tax\t6.5"));
-    assertThat(output, containsString("Total Amount\t71.5"));
+    assertThat(output, containsString("税额：6.5"));
+    assertThat(output, containsString("总价：71.5"));
   }
 
   @Test
