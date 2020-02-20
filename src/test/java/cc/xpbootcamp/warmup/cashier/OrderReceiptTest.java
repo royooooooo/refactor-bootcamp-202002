@@ -2,7 +2,7 @@ package cc.xpbootcamp.warmup.cashier;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.not;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -48,15 +48,16 @@ class OrderReceiptTest {
 
     String output = receipt.printReceipt();
 
-    assertThat(output, containsString("===== 老王超市，值得信赖 ======"));
-    assertThat(output, containsString("2020年2月17日，星期一\n"));
-    assertThat(output, containsString("milk，10.00 ✖ 2，20.00\n"));
-    assertThat(output, containsString("biscuits，5.00 ✖ 5，25.00\n"));
-    assertThat(output, containsString("chocolate，20.00 ✖ 1，20.00\n"));
-    assertThat(output, containsString("-----------------------------------"));
-    assertThat(output, containsString("税额：6.50"));
-    assertThat(output, not(containsString("折扣：")));
-    assertThat(output, containsString("总价：71.50"));
+    assertEquals(
+        output,
+        "===== 老王超市，值得信赖 ======\n\n"
+            + "2020年2月17日，星期一\n\n"
+            + "milk，10.00 ✖ 2，20.00\n"
+            + "biscuits，5.00 ✖ 5，25.00\n"
+            + "chocolate，20.00 ✖ 1，20.00\n"
+            + "-----------------------------------\n"
+            + "税额：6.50\n"
+            + "总价：71.50");
   }
 
   @Test
@@ -84,13 +85,15 @@ class OrderReceiptTest {
 
     String output = receipt.printReceipt();
 
-    assertThat(output, containsString("===== 老王超市，值得信赖 ======"));
-    assertThat(output, containsString("2020年2月19日，星期三\n"));
-    assertThat(output, containsString("巧克力，21.50 ✖ 2，43.00\n"));
-    assertThat(output, containsString("小白菜，10.00 ✖ 1，10.00\n"));
-    assertThat(output, containsString("-----------------------------------"));
-    assertThat(output, containsString("税额：5.30"));
-    assertThat(output, containsString("折扣：1.17"));
-    assertThat(output, containsString("总价：57.13"));
+    assertEquals(
+        output,
+        "===== 老王超市，值得信赖 ======\n\n"
+            + "2020年2月19日，星期三\n\n"
+            + "巧克力，21.50 ✖ 2，43.00\n"
+            + "小白菜，10.00 ✖ 1，10.00\n"
+            + "-----------------------------------\n"
+            + "税额：5.30\n"
+            + "折扣：1.17\n"
+            + "总价：57.13");
   }
 }
