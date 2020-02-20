@@ -4,7 +4,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 public class OrderReceipt {
-  public static double SALE_ROTE = .10;
+  public static double SALE_RATE = .10;
   public static double DISCOUNT_RATE = 0.02;
   public static int DISCOUNT_DAY = 3;
   public static String SUPERMARKET_TITLE = "===== 老王超市，值得信赖 ======\n";

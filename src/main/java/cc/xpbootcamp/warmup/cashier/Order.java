@@ -15,7 +15,7 @@ public class Order {
         .reduce(
             0d,
             (totalSaleTax, lineItem) ->
-                totalSaleTax + (lineItem.totalAmount() * OrderReceipt.SALE_ROTE),
+                totalSaleTax + (lineItem.totalAmount() * OrderReceipt.SALE_RATE),
             Double::sum);
   }
 
