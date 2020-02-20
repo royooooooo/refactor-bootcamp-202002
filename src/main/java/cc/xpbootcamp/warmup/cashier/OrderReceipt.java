@@ -7,6 +7,12 @@ public class OrderReceipt {
   public static double SALE_ROTE = .10;
   public static double DISCOUNT_RATE = 0.02;
   public static String DISCOUNT_DAY = "星期三";
+  public static String SUPERMARKET_TITLE = "===== 老王超市，值得信赖 ======\n";
+  public static String DATE_FORMATTER_PATTERN = "yyyy年M月dd日，EE";
+  public static String LINE = "-----------------------------------\n";
+  public static String TOTAL_SALES_FORMATTER = "税额：%.2f\n";
+  public static String DISCOUNT_FORMATTER = "折扣：%.2f\n";
+  public static String TOTAL_AMOUNT = "总价：%.2f";
 
   private Order order;
   private DateProvider dateProvider;
@@ -24,11 +30,12 @@ public class OrderReceipt {
   }
 
   private String getReceiptHeader() {
-    return "===== 老王超市，值得信赖 ======\n";
+
+    return SUPERMARKET_TITLE;
   }
 
   private String getReceiptDateInformation() {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy年M月dd日，EE", Locale.CHINA);
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMATTER_PATTERN, Locale.CHINA);
     return "\n" + dateProvider.getCurrentDate().format(formatter) + "\n";
   }
 
@@ -37,23 +44,24 @@ public class OrderReceipt {
   }
 
   private String getReceiptFooterInformation() {
-    return "-----------------------------------\n"
+
+    return LINE
         + getTotalSalesTaxInformation()
         + getDiscountInformation()
         + getTotalAmountInformation();
   }
 
   private String getTotalSalesTaxInformation() {
-    return String.format("税额：%.2f\n", order.getTotalSalesTax());
+    return String.format(TOTAL_SALES_FORMATTER, order.getTotalSalesTax());
   }
 
   private String getDiscountInformation() {
-    return todayIsDiscountDay() ? String.format("折扣：%.2f\n", getDiscount()) : "";
+    return todayIsDiscountDay() ? String.format(DISCOUNT_FORMATTER, getDiscount()) : "";
   }
 
   private String getTotalAmountInformation() {
     return String.format(
-        "总价：%.2f", order.getTotalAmountWithoutTax() + order.getTotalSalesTax() - getDiscount());
+        TOTAL_AMOUNT, order.getTotalAmountWithoutTax() + order.getTotalSalesTax() - getDiscount());
   }
 
   private boolean todayIsDiscountDay() {
