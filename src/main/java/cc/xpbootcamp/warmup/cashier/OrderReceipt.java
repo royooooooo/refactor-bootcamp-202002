@@ -12,7 +12,7 @@ public class OrderReceipt {
   public static String LINE = "-----------------------------------\n";
   public static String TOTAL_SALES_FORMATTER = "税额：%.2f\n";
   public static String DISCOUNT_FORMATTER = "折扣：%.2f\n";
-  public static String TOTAL_AMOUNT = "总价：%.2f";
+  public static String TOTAL_AMOUNT_FORMATTER = "总价：%.2f";
 
   private Order order;
   private DateProvider dateProvider;
@@ -61,7 +61,7 @@ public class OrderReceipt {
 
   private String getTotalAmountInformation() {
     return String.format(
-        TOTAL_AMOUNT, order.getTotalAmountWithoutTax() + order.getTotalSalesTax() - getDiscount());
+        TOTAL_AMOUNT_FORMATTER, order.getTotalAmountWithoutTax() + order.getTotalSalesTax() - getDiscount());
   }
 
   private boolean todayIsDiscountDay() {
