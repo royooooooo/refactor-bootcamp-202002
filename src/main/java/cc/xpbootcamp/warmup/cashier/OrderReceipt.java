@@ -6,7 +6,7 @@ import java.util.Locale;
 public class OrderReceipt {
   public static double SALE_ROTE = .10;
   public static double DISCOUNT_RATE = 0.02;
-  public static String DISCOUNT_DAY = "星期三";
+  public static int DISCOUNT_DAY = 3;
   public static String SUPERMARKET_TITLE = "===== 老王超市，值得信赖 ======\n";
   public static String DATE_FORMATTER_PATTERN = "yyyy年M月dd日，EE";
   public static String LINE = "-----------------------------------\n";
@@ -65,7 +65,7 @@ public class OrderReceipt {
   }
 
   private boolean todayIsDiscountDay() {
-    return getReceiptDateInformation().contains(DISCOUNT_DAY);
+    return dateProvider.getCurrentDate().getDayOfWeek().getValue() == DISCOUNT_DAY;
   }
 
   private double getDiscount() {
