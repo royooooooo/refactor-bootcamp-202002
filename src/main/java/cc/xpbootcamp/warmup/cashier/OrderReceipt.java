@@ -11,6 +11,7 @@ public class OrderReceipt {
   public static String TOTAL_SALES_FORMATTER = "税额：%.2f\n";
   public static String DISCOUNT_FORMATTER = "折扣：%.2f\n";
   public static String TOTAL_AMOUNT_FORMATTER = "总价：%.2f";
+  public static String LINE_ITEM_TYPE_INFORMATION_FORMATTER = "%s，%.2f ✖ %d，%.2f\n";
 
   private Order order;
 
@@ -49,8 +50,9 @@ public class OrderReceipt {
   }
 
   public String getLineItemTypeInformation(LineItem lineItem) {
+
     return String.format(
-        "%s，%.2f ✖ %d，%.2f\n",
+        LINE_ITEM_TYPE_INFORMATION_FORMATTER,
         lineItem.getDescription(),
         lineItem.getPrice(),
         lineItem.getQuantity(),
