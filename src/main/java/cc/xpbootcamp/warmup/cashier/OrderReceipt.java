@@ -4,7 +4,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 public class OrderReceipt {
-  public static double SALE_RATE = .10;
   public static String SUPERMARKET_TITLE = "===== 老王超市，值得信赖 ======\n";
   public static String DATE_FORMATTER_PATTERN = "yyyy年M月dd日，EE";
   public static String LINE = "-----------------------------------\n";
@@ -28,7 +27,6 @@ public class OrderReceipt {
   }
 
   private String getReceiptHeader() {
-
     return SUPERMARKET_TITLE;
   }
 

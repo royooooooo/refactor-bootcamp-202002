@@ -3,7 +3,7 @@ package cc.xpbootcamp.warmup.cashier;
 import java.util.List;
 
 public class Order {
-
+  public static double SALE_RATE = .10;
   public static double DISCOUNT_RATE = 0.02;
   public static int DISCOUNT_DAY = 3;
   private DateProvider dateProvider;
@@ -25,20 +25,11 @@ public class Order {
   }
 
   public double getTotalSalesTax() {
-    return lineItems.stream()
-        .reduce(
-            0d,
-            (totalSaleTax, lineItem) ->
-                totalSaleTax + (lineItem.totalAmount() * OrderReceipt.SALE_RATE),
-            Double::sum);
+    return getTotalAmountWithoutTax() * SALE_RATE;
   }
 
   public double getTotalAmountWithoutTax() {
-    return lineItems.stream()
-        .reduce(
-            0d,
-            (totalAmountWithoutTax, lineItem) -> totalAmountWithoutTax + lineItem.totalAmount(),
-            Double::sum);
+    return lineItems.stream().mapToDouble(LineItem::totalAmount).sum();
   }
 
   private boolean todayIsDiscountDay() {
