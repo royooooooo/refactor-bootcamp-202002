@@ -2,6 +2,7 @@ package cc.xpbootcamp.warmup.cashier;
 
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 public class OrderReceipt {
   public static String SUPERMARKET_TITLE = "===== 老王超市，值得信赖 ======\n";
@@ -36,19 +37,26 @@ public class OrderReceipt {
   }
 
   private String getReceiptBodyInformation() {
-    return order.lineItems.stream()
-        .reduce(
-            "\n",
-            (typeInformation, lineItem) -> typeInformation + lineItem.getLineItemTypeInformation(),
-            String::concat);
+    return "\n"
+        + order.lineItems.stream()
+            .map(this::getLineItemTypeInformation)
+            .collect(Collectors.joining());
   }
 
   private String getReceiptFooterInformation() {
-
     return LINE
         + getTotalSalesTaxInformation()
         + getDiscountInformation()
         + getTotalAmountInformation();
+  }
+
+  public String getLineItemTypeInformation(LineItem lineItem) {
+    return String.format(
+        "%s，%.2f ✖ %d，%.2f\n",
+        lineItem.getDescription(),
+        lineItem.getPrice(),
+        lineItem.getQuantity(),
+        lineItem.totalAmount());
   }
 
   private String getTotalSalesTaxInformation() {

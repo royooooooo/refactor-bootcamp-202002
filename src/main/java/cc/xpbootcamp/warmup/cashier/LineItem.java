@@ -27,10 +27,4 @@ public class LineItem {
   public double totalAmount() {
     return price * quantity;
   }
-
-  public String getLineItemTypeInformation() {
-    return String.format(
-        "%s，%.2f ✖ %d，%.2f\n",
-        this.getDescription(), this.getPrice(), this.getQuantity(), this.totalAmount());
-  }
 }
