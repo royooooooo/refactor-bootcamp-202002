@@ -3,11 +3,16 @@ package cc.xpbootcamp.warmup.cashier;
 import java.util.List;
 
 public class Order {
+
+  public static double DISCOUNT_RATE = 0.02;
+  public static int DISCOUNT_DAY = 3;
+  private DateProvider dateProvider;
   String customerName;
   String address;
   List<LineItem> lineItems;
 
-  public Order(List<LineItem> lineItems) {
+  public Order(DateProvider dateProvider, List<LineItem> lineItems) {
+    this.dateProvider = dateProvider;
     this.lineItems = lineItems;
   }
 
@@ -42,5 +47,15 @@ public class Order {
             "\n",
             (typeInformation, lineItem) -> typeInformation + lineItem.getLineItemTypeInformation(),
             String::concat);
+  }
+
+  private boolean todayIsDiscountDay() {
+    return dateProvider.getCurrentDate().getDayOfWeek().getValue() == DISCOUNT_DAY;
+  }
+
+  public double getDiscount() {
+    return todayIsDiscountDay()
+        ? (getTotalAmountWithoutTax() + getTotalSalesTax()) * DISCOUNT_RATE
+        : 0;
   }
 }
