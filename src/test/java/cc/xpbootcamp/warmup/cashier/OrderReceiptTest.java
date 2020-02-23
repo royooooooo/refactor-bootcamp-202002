@@ -23,8 +23,8 @@ class OrderReceiptTest {
   @Test
   void shouldPrintCustomerInformationOnOrder() {
     mockDate(2020, 2, 17, 12, 12);
-    Order order = new Order(dateProvider, new ArrayList<>());
-    OrderReceipt receipt = new OrderReceipt(order, dateProvider);
+    Order order = new Order(new ArrayList<>(), dateProvider.getCurrentDate());
+    OrderReceipt receipt = new OrderReceipt(order);
 
     String output = receipt.printReceipt();
 
@@ -44,7 +44,7 @@ class OrderReceiptTest {
             add(new LineItem("chocolate", 20.0, 1));
           }
         };
-    OrderReceipt receipt = new OrderReceipt(new Order(dateProvider, lineItems), dateProvider);
+    OrderReceipt receipt = new OrderReceipt(new Order(lineItems, dateProvider.getCurrentDate()));
 
     String output = receipt.printReceipt();
 
@@ -63,8 +63,8 @@ class OrderReceiptTest {
   @Test
   public void shouldPrintCorrectDateInformationInDifferentDays() {
     mockDate(2020, 2, 19, 12, 12);
-    Order order = new Order(dateProvider, new ArrayList<>());
-    OrderReceipt receipt = new OrderReceipt(order, dateProvider);
+    Order order = new Order(new ArrayList<>(), dateProvider.getCurrentDate());
+    OrderReceipt receipt = new OrderReceipt(order);
 
     String output = receipt.printReceipt();
 
@@ -81,7 +81,7 @@ class OrderReceiptTest {
             add(new LineItem("小白菜", 10, 1));
           }
         };
-    OrderReceipt receipt = new OrderReceipt(new Order(dateProvider, lineItems), dateProvider);
+    OrderReceipt receipt = new OrderReceipt(new Order(lineItems, dateProvider.getCurrentDate()));
 
     String output = receipt.printReceipt();
 

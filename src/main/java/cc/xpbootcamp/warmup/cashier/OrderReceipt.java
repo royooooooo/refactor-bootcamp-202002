@@ -13,11 +13,9 @@ public class OrderReceipt {
   public static String TOTAL_AMOUNT_FORMATTER = "总价：%.2f";
 
   private Order order;
-  private DateProvider dateProvider;
 
-  public OrderReceipt(Order order, DateProvider dateProvider) {
+  public OrderReceipt(Order order) {
     this.order = order;
-    this.dateProvider = dateProvider;
   }
 
   public String printReceipt() {
@@ -33,7 +31,7 @@ public class OrderReceipt {
 
   private String getReceiptDateInformation() {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMATTER_PATTERN, Locale.CHINA);
-    return "\n" + dateProvider.getCurrentDate().format(formatter) + "\n";
+    return "\n" + order.getCreateDate().format(formatter) + "\n";
   }
 
   private String getReceiptBodyInformation() {
