@@ -38,7 +38,11 @@ public class OrderReceipt {
   }
 
   private String getReceiptBodyInformation() {
-    return order.getOrderLineItemsTypeInformation();
+    return order.lineItems.stream()
+        .reduce(
+            "\n",
+            (typeInformation, lineItem) -> typeInformation + lineItem.getLineItemTypeInformation(),
+            String::concat);
   }
 
   private String getReceiptFooterInformation() {

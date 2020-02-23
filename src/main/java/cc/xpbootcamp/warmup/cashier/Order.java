@@ -41,14 +41,6 @@ public class Order {
             Double::sum);
   }
 
-  public String getOrderLineItemsTypeInformation() {
-    return lineItems.stream()
-        .reduce(
-            "\n",
-            (typeInformation, lineItem) -> typeInformation + lineItem.getLineItemTypeInformation(),
-            String::concat);
-  }
-
   private boolean todayIsDiscountDay() {
     return dateProvider.getCurrentDate().getDayOfWeek().getValue() == DISCOUNT_DAY;
   }
